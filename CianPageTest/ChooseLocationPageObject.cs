@@ -29,9 +29,9 @@ namespace CianPageTest
         {
             var any = driver.FindElements(_allCityButton).FirstOrDefault(x => x.Text == nameList);
             any.Click();
-
             var choose = driver.FindElement(_chooseButton);
             choose.Click();
+            Thread.Sleep(400);
         }
     }
 }

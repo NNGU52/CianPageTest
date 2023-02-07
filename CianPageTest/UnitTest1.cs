@@ -22,6 +22,8 @@ namespace CianPageTest
 
             mainMenu.ChangeLocation();
             chooseLocation.ClickOneElementOfList(NameList.ByNizhnyNovgorod);
+            mainMenu.WaitElement(driver.FindElement(mainMenu._locationButton), NameList.ByNizhnyNovgorod);
+            Assert.AreEqual(NameList.ByNizhnyNovgorod, driver.FindElement(mainMenu._locationButton).Text, "Location is wrong");
         }
 
         //[Test]
