@@ -1,18 +1,45 @@
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenQA.Selenium;
+using System.Threading;
+using OpenQA.Selenium.Interactions;
 
 namespace CianPageTest
 {
-    public class Tests
-    {
-        [SetUp]
-        public void Setup()
-        {
-        }
+    [TestFixture]
 
+    public class Tests : BaseClass
+    {
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            ChooseLocationPageObject chooseLocation = new ChooseLocationPageObject(driver);
+
+            mainMenu.ChangeLocation();
+            chooseLocation.ClickOneElementOfList(NameList.ByNizhnyNovgorod);
         }
+
+        //[Test]
+        //public void Test2()
+        //{
+            
+        //}
+
+        //[Test]
+        //public void Test3()
+        //{
+            
+        //}
+
+        //[Test]
+        //public void Test4()
+        //{
+            
+        //}
     }
 }
