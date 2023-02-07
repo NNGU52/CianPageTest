@@ -26,11 +26,17 @@ namespace CianPageTest
             Assert.AreEqual(NameList.ByNizhnyNovgorod, driver.FindElement(mainMenu._locationButton).Text, "Location is wrong");
         }
 
-        //[Test]
-        //public void Test2()
-        //{
-            
-        //}
+        [Test]
+        public void Test2()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            MagazinePageObject magazine = new MagazinePageObject(driver);
+
+            mainMenu.LookingForAnElement();
+            var actualSortDate = magazine.GetListsNewsDates().ToList();
+            var expectedSortDate = actualSortDate.OrderByDescending(x => x);
+            Assert.IsTrue(expectedSortDate.SequenceEqual(actualSortDate), "The sort date is wrong");
+        }
 
         //[Test]
         //public void Test3()

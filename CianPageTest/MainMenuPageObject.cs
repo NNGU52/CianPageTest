@@ -16,6 +16,8 @@ namespace CianPageTest
         IWebDriver driver;
 
         public readonly By _locationButton = By.XPath("//span[@class='_025a50318d--text--SCFDt']");
+        private readonly By _rentButton = By.XPath("//a[@class='_25d45facb5--link--rqF9a']");
+        private readonly By _magazineButton = By.XPath("//span[@data-testid='dropdown_link_icon']");
 
 
         public MainMenuPageObject(IWebDriver webDriver)
@@ -29,7 +31,28 @@ namespace CianPageTest
             nameBy.Click();
         }
 
-        // явное ожидание 
+        public void LookingForAnElement()
+        {
+            var rentBy = driver.FindElement(_rentButton);
+            Actions builder = new Actions(driver);
+            builder.MoveToElement(rentBy).Perform();
+            WaitElement(_magazineButton);
+            var magazineBy = driver.FindElement(_magazineButton);
+            magazineBy.Click();
+        }
+
+        public void WaitElement(By locator)
+        {
+            try
+            {
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                throw new NotFoundException($"Erroneous text: {locator}", ex);
+            }
+        }
+
         public void WaitElement(IWebElement element, string str)
         {
             try
