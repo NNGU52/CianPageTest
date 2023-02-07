@@ -18,7 +18,7 @@ namespace CianPageTest
         public readonly By _locationButton = By.XPath("//span[@class='_025a50318d--text--SCFDt']");
         private readonly By _rentButton = By.XPath("//a[@class='_25d45facb5--link--rqF9a']");
         private readonly By _magazineButton = By.XPath("//span[@data-testid='dropdown_link_icon']");
-
+        public readonly By _feedbackButton = By.XPath("//img[@class='uxs-17nl1ib uxs-2O1rU349bI']");
 
         public MainMenuPageObject(IWebDriver webDriver)
         {
@@ -39,6 +39,12 @@ namespace CianPageTest
             WaitElement(_magazineButton);
             var magazineBy = driver.FindElement(_magazineButton);
             magazineBy.Click();
+        }
+
+        public void LeaveFeedback()
+        {
+            var feedback = driver.FindElement(_feedbackButton);
+            feedback.Click();
         }
 
         public void WaitElement(By locator)

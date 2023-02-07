@@ -38,16 +38,24 @@ namespace CianPageTest
             Assert.IsTrue(expectedSortDate.SequenceEqual(actualSortDate), "The sort date is wrong");
         }
 
-        //[Test]
-        //public void Test3()
-        //{
-            
-        //}
+        [Test]
+        public void Test3()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            PageScore pageScore = new PageScore(driver);
+
+            mainMenu.WaitElement(mainMenu._feedbackButton);
+            mainMenu.LeaveFeedback();
+            mainMenu.WaitElement(pageScore._emotionsButton);
+            pageScore.RatePages();
+            Assert.IsTrue(pageScore.CheckElement(pageScore.thankYouText), "No such element");
+            pageScore.ThankYou();
+        }
 
         //[Test]
         //public void Test4()
         //{
-            
+
         //}
     }
 }
