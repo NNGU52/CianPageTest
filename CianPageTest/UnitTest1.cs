@@ -60,7 +60,6 @@ namespace CianPageTest
 
             mainMenu.ClickElementPeak();
             peakPage.CalculateMortgage();
-           
             Assert.AreEqual(peakPage._checkResultRealEstate, driver.FindElement(peakPage._realEstateValueInput).GetAttribute("value"), "");
         }
 
@@ -74,6 +73,14 @@ namespace CianPageTest
             apartmentComparison.ClickElementSearchApartments();
             apartmentComparison.ClickAddApartment();
             Assert.AreEqual(apartmentComparison._numberApartmentExpected, apartmentComparison._numberApartmentActual, "Added incorrectly");
+        }
+
+        [Test]
+        public void Test6()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+
+            Assert.IsFalse(mainMenu.ClickElementAsseptCookies(), "Element exists");
         }
     }
 }

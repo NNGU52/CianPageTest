@@ -19,8 +19,9 @@ namespace CianPageTest
         private readonly By _rentButton = By.XPath("//a[@class='_25d45facb5--link--rqF9a']");
         private readonly By _magazineButton = By.XPath("//span[@data-testid='dropdown_link_icon']");
         public readonly By _feedbackButton = By.XPath("//img[@class='uxs-17nl1ib uxs-2O1rU349bI']");
-        public readonly By _peakButton = By.XPath("//a[@data-name='SpecialPromoDesktop']");
-        public readonly By _objectComparisonButton = By.XPath("//a[@data-name='UtilityCompareContainer']");
+        private readonly By _peakButton = By.XPath("//a[@data-name='SpecialPromoDesktop']");
+        private readonly By _objectComparisonButton = By.XPath("//a[@data-name='UtilityCompareContainer']");
+        private readonly By _asseptCookiesButton = By.XPath("//div[@class='_25d45facb5--button--CaFmg']");
 
         public MainMenuPageObject(IWebDriver webDriver)
         {
@@ -61,6 +62,15 @@ namespace CianPageTest
             objectComparison.Click();
         }
 
+        public bool ClickElementAsseptCookies()
+        {
+            //WaitElement(_asseptCookiesButton);
+            var asseptCookies = driver.FindElement(_asseptCookiesButton);
+            asseptCookies.Click();
+
+            return CheckElement(_asseptCookiesButton);
+        }
+
         public void WaitElement(By locator)
         {
             try
@@ -82,6 +92,19 @@ namespace CianPageTest
             catch (WebDriverTimeoutException ex)
             {
                 throw new NotFoundException($"Erroneous text: {element}", ex);
+            }
+        }
+
+        public bool CheckElement(By locator)
+        {
+            try
+            {
+                driver.FindElement(locator);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
             }
         }
 
