@@ -88,13 +88,18 @@ namespace CianPageTest
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
 
-            Assert.That(mainMenu.AllTheTopTabs(), Has.No.Member("Аренда"));
+            Assert.That(mainMenu.AllTheTopTabs(), Has.Member("Аренда"));
         }
 
         [Test]
         public void Test8()
         {
-            
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            CianDreamTeamPageObject cianDreamTeam = new CianDreamTeamPageObject(driver);
+
+            mainMenu.ClickElementCareerInCian();
+            cianDreamTeam.ClickElementBlogOnHabr();
+            Assert.AreEqual(cianDreamTeam.expectedUrl, cianDreamTeam.currentUrl, "Incorrect Url");
         }
 
         [Test]

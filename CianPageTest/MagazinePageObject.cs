@@ -12,7 +12,6 @@ namespace CianPageTest
 {
     class MagazinePageObject
     {
-
         IWebDriver driver;
 
         private readonly By _allTheDateNews = By.XPath("//span[@itemprop='datePublished']");

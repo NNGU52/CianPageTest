@@ -23,6 +23,7 @@ namespace CianPageTest
         private readonly By _objectComparisonButton = By.XPath("//a[@data-name='UtilityCompareContainer']");
         private readonly By _asseptCookiesButton = By.XPath("//div[@class='_25d45facb5--button--CaFmg']");
         private readonly By _allTheTopTabs = By.CssSelector("._25d45facb5--link--rqF9a");
+        private readonly By _careerInCianButton = By.XPath("//a[@href='https://team.cian.tech/']");
 
         public MainMenuPageObject(IWebDriver webDriver)
         {
@@ -75,6 +76,13 @@ namespace CianPageTest
         {
             var list = driver.FindElements(_allTheTopTabs).Select(x => x.Text).ToList();
             return list;
+        }
+
+        public void ClickElementCareerInCian()
+        {
+            var career = driver.FindElement(_careerInCianButton);
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", career);
+            career.Click();
         }
 
         public void WaitElement(By locator)
