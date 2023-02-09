@@ -48,7 +48,7 @@ namespace CianPageTest
             mainMenu.ClickLeaveFeedback();
             mainMenu.WaitElement(pageScore._emotionsButton);
             pageScore.RatePages();
-            Assert.IsTrue(pageScore.CheckElement(pageScore.thankYouText), "No such element");
+            Assert.IsTrue(pageScore.CheckElement(pageScore._thankYouText), "No such element");
             pageScore.ThankYou();
         }
 
@@ -81,6 +81,32 @@ namespace CianPageTest
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
 
             Assert.IsFalse(mainMenu.ClickElementAsseptCookies(), "Element exists");
+        }
+
+        [Test]
+        public void Test7()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+
+            Assert.That(mainMenu.AllTheTopTabs(), Has.No.Member("Аренда"));
+        }
+
+        [Test]
+        public void Test8()
+        {
+            
+        }
+
+        [Test]
+        public void Test9()
+        {
+            
+        }
+
+        [Test]
+        public void Test10()
+        {
+            
         }
     }
 }

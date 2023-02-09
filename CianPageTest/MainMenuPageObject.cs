@@ -22,6 +22,7 @@ namespace CianPageTest
         private readonly By _peakButton = By.XPath("//a[@data-name='SpecialPromoDesktop']");
         private readonly By _objectComparisonButton = By.XPath("//a[@data-name='UtilityCompareContainer']");
         private readonly By _asseptCookiesButton = By.XPath("//div[@class='_25d45facb5--button--CaFmg']");
+        private readonly By _allTheTopTabs = By.CssSelector("._25d45facb5--link--rqF9a");
 
         public MainMenuPageObject(IWebDriver webDriver)
         {
@@ -64,11 +65,16 @@ namespace CianPageTest
 
         public bool ClickElementAsseptCookies()
         {
-            //WaitElement(_asseptCookiesButton);
             var asseptCookies = driver.FindElement(_asseptCookiesButton);
             asseptCookies.Click();
 
             return CheckElement(_asseptCookiesButton);
+        }
+
+        public List<string> AllTheTopTabs()
+        {
+            var list = driver.FindElements(_allTheTopTabs).Select(x => x.Text).ToList();
+            return list;
         }
 
         public void WaitElement(By locator)

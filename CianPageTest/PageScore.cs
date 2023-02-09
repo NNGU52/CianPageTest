@@ -20,8 +20,8 @@ namespace CianPageTest
         private readonly By _answerButton = By.XPath("//button[@class='uxs-30xgIMVCYs uxs-weow7w']");
         private readonly By _closeButton = By.XPath("//button[@class='uxs-30xgIMVCYs uxs-weow7w']");
 
-        private string commentText = "...";
-        public string thankYouText = "uxs-3DTPcx41v5 uxs-1kyr5oa";
+        private string _commentText = "...";
+        public string _thankYouText = "uxs-3DTPcx41v5 uxs-1kyr5oa";
 
         public PageScore(IWebDriver webDriver)
         {
@@ -33,7 +33,7 @@ namespace CianPageTest
             var emotion = driver.FindElement(_emotionsButton);
             emotion.Click();
             var comment = driver.FindElement(_commentInputText);
-            comment.SendKeys(commentText);
+            comment.SendKeys(_commentText);
             var answer = driver.FindElement(_answerButton);
             answer.Click();
         }
