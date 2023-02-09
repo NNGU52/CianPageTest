@@ -19,6 +19,8 @@ namespace CianPageTest
         private readonly By _rentButton = By.XPath("//a[@class='_25d45facb5--link--rqF9a']");
         private readonly By _magazineButton = By.XPath("//span[@data-testid='dropdown_link_icon']");
         public readonly By _feedbackButton = By.XPath("//img[@class='uxs-17nl1ib uxs-2O1rU349bI']");
+        public readonly By _peakButton = By.XPath("//a[@data-name='SpecialPromoDesktop']");
+        public readonly By _objectComparisonButton = By.XPath("//a[@data-name='UtilityCompareContainer']");
 
         public MainMenuPageObject(IWebDriver webDriver)
         {
@@ -41,10 +43,22 @@ namespace CianPageTest
             magazineBy.Click();
         }
 
-        public void LeaveFeedback()
+        public void ClickLeaveFeedback()
         {
             var feedback = driver.FindElement(_feedbackButton);
             feedback.Click();
+        }
+
+        public void ClickElementPeak()
+        {
+            var peak = driver.FindElement(_peakButton);
+            peak.Click();
+        }
+
+        public void ClickElementObjectComparison()
+        {
+            var objectComparison = driver.FindElement(_objectComparisonButton);
+            objectComparison.Click();
         }
 
         public void WaitElement(By locator)
@@ -55,7 +69,7 @@ namespace CianPageTest
             }
             catch (WebDriverTimeoutException ex)
             {
-                throw new NotFoundException($"Erroneous text: {locator}", ex);
+                throw new NotFoundException($"Not found: {locator}", ex);
             }
         }
 

@@ -45,17 +45,35 @@ namespace CianPageTest
             PageScore pageScore = new PageScore(driver);
 
             mainMenu.WaitElement(mainMenu._feedbackButton);
-            mainMenu.LeaveFeedback();
+            mainMenu.ClickLeaveFeedback();
             mainMenu.WaitElement(pageScore._emotionsButton);
             pageScore.RatePages();
             Assert.IsTrue(pageScore.CheckElement(pageScore.thankYouText), "No such element");
             pageScore.ThankYou();
         }
 
-        //[Test]
-        //public void Test4()
-        //{
+        [Test]
+        public void Test4()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            PeakPageObject peakPage = new PeakPageObject(driver);
 
-        //}
+            mainMenu.ClickElementPeak();
+            peakPage.CalculateMortgage();
+           
+            Assert.AreEqual(peakPage._checkResultRealEstate, driver.FindElement(peakPage._realEstateValueInput).GetAttribute("value"), "");
+        }
+
+        [Test]
+        public void Test5()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            ApartmentComparisonPageObject apartmentComparison = new ApartmentComparisonPageObject(driver);
+
+            mainMenu.ClickElementObjectComparison();
+            apartmentComparison.ClickElementSearchApartments();
+            apartmentComparison.ClickAddApartment();
+            Assert.AreEqual(apartmentComparison._numberApartmentExpected, apartmentComparison._numberApartmentActual, "Added incorrectly");
+        }
     }
 }
