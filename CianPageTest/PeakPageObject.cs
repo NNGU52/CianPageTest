@@ -20,12 +20,12 @@ namespace CianPageTest
         private readonly By _sliderSlider3 = By.XPath("(//span[@role='slider'])[3]");
         private readonly By _sliderSlider4 = By.XPath("(//span[@role='slider'])[4]");
         public readonly By _realEstateValueInput = By.XPath("(//input[@class='_9330de7794--input--YmTjn'])[1]");
-        private readonly By _anInitialFeeInput = By.XPath("(//input[@class='_9330de7794--input--YmTjn'])[2]");
-        private readonly By _creditTermInput = By.XPath("(//input[@class='_9330de7794--input--YmTjn'])[3]");
-        private readonly By _interestRateInput = By.XPath("(//input[@class='_9330de7794--input--YmTjn'])[4]");
+        public readonly By _anInitialFeeInput = By.XPath("(//input[@class='_9330de7794--input--YmTjn'])[2]");
+        public readonly By _creditTermInput = By.XPath("(//input[@class='_9330de7794--input--YmTjn'])[3]");
+        public readonly By _interestRateInput = By.XPath("(//input[@class='_9330de7794--input--YmTjn'])[4]");
 
-        public string _checkResultRealEstate = "6 950 000";
-        public string _checkResultInitialFee = "4965000";
+        public string _checkResultRealEstate = "6 950 000";
+        public string _checkResultInitialFee = "4 965 000";
         public string _checkResultCreditTerm = "21";
         public string _checkResultInterestRate = "8,6";
 
@@ -60,7 +60,7 @@ namespace CianPageTest
             Thread.Sleep(100);
             builder.MoveToElement(slider2).ClickAndHold().MoveByOffset(0, 300).Release().Perform();
             Thread.Sleep(100);
-            builder.MoveToElement(slider3).ClickAndHold().MoveByOffset(100, 0).Perform();
+            builder.MoveToElement(slider3).ClickAndHold().MoveByOffset(100, 0).Release().Perform();
             Thread.Sleep(100);
             builder.MoveToElement(slider4).ClickAndHold().MoveByOffset(100, 0).Release().Perform();
             Thread.Sleep(100);

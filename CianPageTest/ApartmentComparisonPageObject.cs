@@ -20,7 +20,8 @@ namespace CianPageTest
         private readonly By _twoApartmentForm = By.XPath("(//span[@class='_93444fe79c--link-area--NQqFo'])[2]");
         private readonly By _addOneApatmentButton = By.XPath("(//button[@data-mark='ComparisonControl'])[1]");
         private readonly By _addTwoApartmentButton = By.XPath("(//button[@data-mark='ComparisonControl'])[2]");
-        private readonly By _numberApartmentText = By.XPath("//p[@class='_93444fe79c--color_white_100--YUO3d _93444fe79c--lineHeight_20px--tUURJ _93444fe79c--fontWeight_normal--P9Ylg _93444fe79c--fontSize_14px--TCfeJ _93444fe79c--display_block--pDAEx _93444fe79c--text--g9xAG _93444fe79c--text_letterSpacing__normal--xbqP6 _93444fe79c--text_whiteSpace__pre-line--rfFpL']"); 
+        private readonly By _numberApartmentText = By.XPath("//p[@class='_93444fe79c--color_white_100--YUO3d _93444fe79c--lineHeight_20px--tUURJ _93444fe79c--fontWeight_normal--P9Ylg _93444fe79c--fontSize_14px--TCfeJ _93444fe79c--display_block--pDAEx _93444fe79c--text--g9xAG _93444fe79c--text_letterSpacing__normal--xbqP6 _93444fe79c--text_whiteSpace__pre-line--rfFpL']");
+        private readonly By _timeOneForm = By.XPath("(//div[@class='_93444fe79c--absolute--yut0v'])[1]");
 
         public string _numberApartmentExpected = "Вы сравниваете 2 квартиры, можно добавить ещё 18";
         public string _numberApartmentActual = "";
@@ -50,10 +51,11 @@ namespace CianPageTest
             addApartmentOneApatment.Click();
 
             // добавлена к сравнению 2 квартира
+            var time = driver.FindElement(_timeOneForm);
             var twoApartment = driver.FindElement(_twoApartmentForm);
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", twoApartment);
-            builder.MoveToElement(twoApartment).Perform();
             var addApartmentTwoApartment = driver.FindElement(_addTwoApartmentButton);
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView();", time);
+            builder.MoveToElement(twoApartment).Perform();
             addApartmentTwoApartment.Click();
 
             WaitElement(_numberApartmentText);

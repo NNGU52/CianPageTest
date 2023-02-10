@@ -60,7 +60,10 @@ namespace CianPageTest
 
             mainMenu.ClickElementPeak();
             peakPage.CalculateMortgage();
-            Assert.AreEqual(peakPage._checkResultRealEstate, driver.FindElement(peakPage._realEstateValueInput).GetAttribute("value"), "");
+            Assert.AreEqual(peakPage._checkResultRealEstate, driver.FindElement(peakPage._realEstateValueInput).GetAttribute("value"), "Error");
+            Assert.AreEqual(peakPage._checkResultInitialFee, driver.FindElement(peakPage._anInitialFeeInput).GetAttribute("value"), "Error");
+            Assert.AreEqual(peakPage._checkResultCreditTerm, driver.FindElement(peakPage._creditTermInput).GetAttribute("value"), "Error");
+            Assert.AreEqual(peakPage._checkResultInterestRate, driver.FindElement(peakPage._interestRateInput).GetAttribute("value"), "Error");
         }
 
         [Test]
