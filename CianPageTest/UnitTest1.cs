@@ -112,15 +112,22 @@ namespace CianPageTest
             mainMenu.ClickElementSaveOfFavorites();
             apartmentComparison.ClickElementSearchApartments();
             saveToFavorites.SaveToFavorites();
-            Assert.AreEqual(saveToFavorites._saveToFavorites, driver.FindElement(saveToFavorites._saveToFavoritesText).Text, "Not save");
+            Assert.AreEqual(saveToFavorites._saveToFavorites, driver.FindElement(saveToFavorites._saveToFavoritesText).Text, "Not saved");
             saveToFavorites.RemoveFromFavorites();
-            Assert.AreEqual(saveToFavorites._removeToFavorites, driver.FindElement(saveToFavorites._removeToFavoritesTest).Text, "Not remove");
+            Assert.AreEqual(saveToFavorites._removeToFavorites, driver.FindElement(saveToFavorites._removeToFavoritesTest).Text, "Not removed");
         }
 
         [Test]
         public void Test10()
         {
-            
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            ApartmentComparisonPageObject apartmentComparison = new ApartmentComparisonPageObject(driver);
+            SaveSearchPageObject saveSearch = new SaveSearchPageObject(driver);
+
+            mainMenu.ClickElementSaveOfFavorites();
+            apartmentComparison.ClickElementSearchApartments();
+            saveSearch.SaveSearch("Раз в неделю");
+            Assert.AreEqual(saveSearch._saveSearch, driver.FindElement(saveSearch._saveSearchText).Text, "Not saved search");
         }
     }
 }
