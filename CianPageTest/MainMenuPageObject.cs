@@ -85,6 +85,12 @@ namespace CianPageTest
             career.Click();
         }
 
+        public void ClickElementSaveOfFavorites()
+        {
+            var saveofFavorites = driver.FindElement(_objectComparisonButton);
+            saveofFavorites.Click();
+        }
+
         public void WaitElement(By locator)
         {
             try

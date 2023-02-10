@@ -105,7 +105,16 @@ namespace CianPageTest
         [Test]
         public void Test9()
         {
-            
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            ApartmentComparisonPageObject apartmentComparison = new ApartmentComparisonPageObject(driver);
+            SaveToFavoritesPageObject saveToFavorites = new SaveToFavoritesPageObject(driver);
+
+            mainMenu.ClickElementSaveOfFavorites();
+            apartmentComparison.ClickElementSearchApartments();
+            saveToFavorites.SaveToFavorites();
+            Assert.AreEqual(saveToFavorites._saveToFavorites, driver.FindElement(saveToFavorites._saveToFavoritesText).Text, "Not save");
+            saveToFavorites.RemoveFromFavorites();
+            Assert.AreEqual(saveToFavorites._removeToFavorites, driver.FindElement(saveToFavorites._removeToFavoritesTest).Text, "Not remove");
         }
 
         [Test]
