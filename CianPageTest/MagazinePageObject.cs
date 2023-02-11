@@ -21,6 +21,7 @@ namespace CianPageTest
             driver = webDriver;
         }
 
+        // пметод получения листа данных формата DateTime
         public IEnumerable<DateTime> GetListsNewsDates()
         {
             var tableColumnData_ = driver.FindElements(_allTheDateNews);

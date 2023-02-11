@@ -9,10 +9,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace CianPageTest
 {
-    class CianDreamTeamPageObject
+    class CianDreamTeamPageObject : OftenUsedFunctions
     {
-        IWebDriver driver;
-
         private readonly By _blogOnHabrButton = By.XPath("//div[@data-id='5fcce2fa57c044009f261644']");
 
         public string currentUrl = "";
@@ -26,26 +24,11 @@ namespace CianPageTest
         public void ClickElementBlogOnHabr()
         {
             currentUrl = driver.Url;
-            WaitElement(currentUrl);
-            var blogOnHabr = driver.FindElement(_blogOnHabrButton);
-            blogOnHabr.Click();
+            WaitElementUrlToBe(currentUrl);
+            ClickElement(_blogOnHabrButton);
             driver.SwitchTo().Window(driver.WindowHandles.Last());
+            Thread.Sleep(100);
             currentUrl = driver.Url;
         }
-
-        public void WaitElement(string url)
-        {
-            try
-            {
-                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(url));
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                throw new NotFoundException($"Not found: {url}", ex);
-            }
-        }
-
-
-
     }
 }

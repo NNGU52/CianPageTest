@@ -10,10 +10,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace CianPageTest
 {
-    class SaveSearchPageObject
+    class SaveSearchPageObject : OftenUsedFunctions
     {
-        IWebDriver driver;
-
         private readonly By _saveSearchButtun = By.XPath("//span[text()='Сохранить поиск']");
         private readonly By _frequenceNotificationButton = By.XPath("//div[@class='_93444fe79c--label-wrapper--RJwrx']");
         private readonly By _allfrequenceNotificationButton = By.XPath("//div[@class='_93444fe79c--label--h1kOF']");
@@ -33,33 +31,16 @@ namespace CianPageTest
 
         public void SaveSearch(string freq)
         {
-            var saveSearch = driver.FindElement(_saveSearchButtun);
-            saveSearch.Click();
-            WaitElement(_frequenceNotificationButton);
-            var freqNotification = driver.FindElement(_frequenceNotificationButton);
-            freqNotification.Click();
+            ClickElement(_saveSearchButtun);
+            WaitElementToBeVisible(_frequenceNotificationButton);
+            ClickElement(_frequenceNotificationButton);
             var any = driver.FindElements(_allfrequenceNotificationButton).FirstOrDefault(x => x.Text == freq);
             any.Click();
             var email = driver.FindElement(_emailInput);
             email.SendKeys(_email);
-            var newsCian = driver.FindElement(_newsCianCheckBox);
-            newsCian.Click();
-            var pushNotification = driver.FindElement(_pushNotification);
-            pushNotification.Click();
-            var save = driver.FindElement(_saveButton);
-            save.Click();
-        }
-
-        public void WaitElement(By locator)
-        {
-            try
-            {
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                throw new NotFoundException($"Not found: {locator}", ex);
-            }
+            ClickElement(_newsCianCheckBox);
+            ClickElement(_pushNotification);
+            ClickElement(_saveButton);
         }
 
     }

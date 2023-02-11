@@ -20,8 +20,7 @@ namespace CianPageTest
             ChooseLocationPageObject chooseLocation = new ChooseLocationPageObject(driver);
 
             mainMenu.ChangeLocation();
-            chooseLocation.ClickOneElementOfList(NameList.ByNizhnyNovgorod);
-            mainMenu.WaitElement(driver.FindElement(mainMenu._locationButton), NameList.ByNizhnyNovgorod);
+            chooseLocation.ClickOneElementOfList(NameList.ByNizhnyNovgorod, mainMenu._locationButton);
             Assert.AreEqual(NameList.ByNizhnyNovgorod, driver.FindElement(mainMenu._locationButton).Text, "Location is wrong");
         }
 
@@ -43,11 +42,9 @@ namespace CianPageTest
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             PageScore pageScore = new PageScore(driver);
 
-            mainMenu.WaitElement(mainMenu._feedbackButton);
             mainMenu.ClickLeaveFeedback();
-            mainMenu.WaitElement(pageScore._emotionsButton);
             pageScore.RatePages();
-            Assert.IsTrue(pageScore.CheckElement(pageScore._thankYouText), "No such element");
+            Assert.IsTrue(pageScore.RatePages(), "No such element");
             pageScore.ThankYou();
         }
 

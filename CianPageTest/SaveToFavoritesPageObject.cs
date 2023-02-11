@@ -9,10 +9,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace CianPageTest
 {
-    class SaveToFavoritesPageObject
+    class SaveToFavoritesPageObject : OftenUsedFunctions
     {
-        IWebDriver driver;
-
         private readonly By _oneApartmentForm = By.XPath("(//span[@class='_93444fe79c--link-area--NQqFo'])[1]");
         private readonly By _addOneApartmentInFavorites = By.XPath("//button[@data-mark='FavoritesControl']");
         public readonly By _saveToFavoritesText = By.XPath("//div[@class='_93444fe79c--message--BHjBi']");
@@ -32,28 +30,15 @@ namespace CianPageTest
             // добавлена к сравнению 1 квартира
             var oneApartment = driver.FindElement(_oneApartmentForm);
             builder.MoveToElement(oneApartment).Perform();
-            var addFavorites = driver.FindElement(_addOneApartmentInFavorites);
-            addFavorites.Click();
-            WaitElement(_saveToFavoritesText);
+            ClickElement(_addOneApartmentInFavorites);
+            WaitElementToBeVisible(_saveToFavoritesText);
         }
 
         public void RemoveFromFavorites()
         {
             var addFavorites = driver.FindElement(_addOneApartmentInFavorites);
             addFavorites.Click();
-            WaitElement(_removeToFavoritesTest);
-        }
-
-        public void WaitElement(By locator)
-        {
-            try
-            {
-                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                throw new NotFoundException($"Not found: {locator}", ex);
-            }
+            WaitElementToBeVisible(_removeToFavoritesTest);
         }
     }
 }

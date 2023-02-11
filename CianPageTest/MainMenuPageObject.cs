@@ -11,10 +11,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace CianPageTest
 {
-    class MainMenuPageObject
+    class MainMenuPageObject : OftenUsedFunctions
     {
-        IWebDriver driver;
-
         public readonly By _locationButton = By.XPath("//span[@class='_025a50318d--text--SCFDt']");
         private readonly By _rentButton = By.XPath("//a[@class='_25d45facb5--link--rqF9a']");
         private readonly By _magazineButton = By.XPath("//span[@data-testid='dropdown_link_icon']");
@@ -32,8 +30,7 @@ namespace CianPageTest
 
         public void ChangeLocation()
         {
-            var nameBy = driver.FindElement(_locationButton);
-            nameBy.Click();
+            ClickElement(_locationButton);
         }
 
         public void LookingForAnElement()
@@ -41,35 +38,31 @@ namespace CianPageTest
             var rentBy = driver.FindElement(_rentButton);
             Actions builder = new Actions(driver);
             builder.MoveToElement(rentBy).Perform();
-            WaitElement(_magazineButton);
-            var magazineBy = driver.FindElement(_magazineButton);
-            magazineBy.Click();
+            WaitElementToBeVisible(_magazineButton);
+            ClickElement(_magazineButton);
         }
 
         public void ClickLeaveFeedback()
         {
-            var feedback = driver.FindElement(_feedbackButton);
-            feedback.Click();
+            WaitElementToBeVisible(_feedbackButton);
+            ClickElement(_feedbackButton);
         }
 
         public void ClickElementPeak()
         {
-            var peak = driver.FindElement(_peakButton);
-            peak.Click();
+            ClickElement(_peakButton);
         }
 
         public void ClickElementObjectComparison()
         {
-            var objectComparison = driver.FindElement(_objectComparisonButton);
-            objectComparison.Click();
+            ClickElement(_objectComparisonButton);
         }
 
         public bool ClickElementAsseptCookies()
         {
-            var asseptCookies = driver.FindElement(_asseptCookiesButton);
-            asseptCookies.Click();
+            ClickElement(_asseptCookiesButton);
 
-            return CheckElement(_asseptCookiesButton);
+            return CheckElementLocator(_asseptCookiesButton);
         }
 
         public List<string> AllTheTopTabs()
@@ -87,46 +80,7 @@ namespace CianPageTest
 
         public void ClickElementSaveOfFavorites()
         {
-            var saveofFavorites = driver.FindElement(_objectComparisonButton);
-            saveofFavorites.Click();
+            ClickElement(_objectComparisonButton);
         }
-
-        public void WaitElement(By locator)
-        {
-            try
-            {
-                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                throw new NotFoundException($"Not found: {locator}", ex);
-            }
-        }
-
-        public void WaitElement(IWebElement element, string str)
-        {
-            try
-            {
-                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(element, str));
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                throw new NotFoundException($"Erroneous text: {element}", ex);
-            }
-        }
-
-        public bool CheckElement(By locator)
-        {
-            try
-            {
-                driver.FindElement(locator);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
     }
 }

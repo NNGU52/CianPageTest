@@ -11,10 +11,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace CianPageTest
 {
-    class ApartmentComparisonPageObject
+    class ApartmentComparisonPageObject : OftenUsedFunctions
     {
-        IWebDriver driver;
-
         private readonly By _searchApartmentsButton = By.XPath("//span[@class='_5b10bb2305--text--rH6sj']");
         private readonly By _oneApartmentForm = By.XPath("(//span[@class='_93444fe79c--link-area--NQqFo'])[1]");
         private readonly By _twoApartmentForm = By.XPath("(//span[@class='_93444fe79c--link-area--NQqFo'])[2]");
@@ -36,8 +34,7 @@ namespace CianPageTest
         {
             //если всего будет две вкладки, то перейти на новую можно так:
             driver.SwitchTo().Window(driver.WindowHandles.Last());
-            var searchApartments = driver.FindElement(_searchApartmentsButton);
-            searchApartments.Click();
+            ClickElement(_searchApartmentsButton);
         }
 
         public void ClickAddApartment()
@@ -48,44 +45,16 @@ namespace CianPageTest
             var oneApartment = driver.FindElement(_oneApartmentForm);
             builder.MoveToElement(oneApartment).Perform();
             WaitElementToBeClickable(_addOneApatmentButton);
-            var addApartmentOneApatment = driver.FindElement(_addOneApatmentButton);
-            addApartmentOneApatment.Click();
+            ClickElement(_addOneApatmentButton);
 
             // добавлена к сравнению 2 квартира
             var time = driver.FindElement(_timeOneForm);
             var twoApartment = driver.FindElement(_twoApartmentForm);
-            var addApartmentTwoApartment = driver.FindElement(_addTwoApartmentButton);
             ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView();", time);
             builder.MoveToElement(twoApartment).Perform();
-            addApartmentTwoApartment.Click();
-
-            WaitElement(_numberApartmentText);
+            ClickElement(_addTwoApartmentButton);
+            WaitElementToBeVisible(_numberApartmentText);
             _numberApartmentActual = driver.FindElement(_numberApartmentText).Text;
         }
-
-        public void WaitElement(By locator)
-        {
-            try
-            {
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                throw new NotFoundException($"Not found: {locator}", ex);
-            }
-        }
-
-        public void WaitElementToBeClickable(By locator)
-        {
-            try
-            {
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                throw new NotFoundException($"Unable to click: {locator}", ex);
-            }
-        }
-
     }
 }

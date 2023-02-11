@@ -11,10 +11,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace CianPageTest
 {
-    class PageScore
+    class PageScore : OftenUsedFunctions
     {
-        IWebDriver driver;
-
         public readonly By _emotionsButton = By.XPath("//div[@data-title='Нейтрально']");
         private readonly By _commentInputText = By.XPath("//textarea[@class='uxs-Fu3wBavm51 uxs-158rixt']");
         private readonly By _answerButton = By.XPath("//button[@class='uxs-30xgIMVCYs uxs-weow7w']");
@@ -28,33 +26,21 @@ namespace CianPageTest
             driver = webDriver;
         }
 
-        public void RatePages()
+        public bool RatePages()
         {
-            var emotion = driver.FindElement(_emotionsButton);
-            emotion.Click();
+            WaitElementToBeVisible(_emotionsButton);
+            ClickElement(_emotionsButton);
             var comment = driver.FindElement(_commentInputText);
             comment.SendKeys(_commentText);
-            var answer = driver.FindElement(_answerButton);
-            answer.Click();
+            ClickElement(_answerButton);
+            bool check = CheckElementStr(_thankYouText);
+
+            return check;
         }
 
         public void ThankYou()
         {
-            var close = driver.FindElement(_closeButton);
-            close.Click();
-        }
-
-        public bool CheckElement(string str)
-        {
-            try
-            {
-                driver.PageSource.Contains(str);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
+            ClickElement(_closeButton);
         }
     }
 }

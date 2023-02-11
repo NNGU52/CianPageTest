@@ -11,10 +11,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace CianPageTest
 {
-    class ChooseLocationPageObject
+    class ChooseLocationPageObject : OftenUsedFunctions
     {
-        IWebDriver driver;
-
         // общий локатор для всех городов и регионов
         private readonly By _allCityButton = By.XPath("//button[@class='_025a50318d--city-button--CDYzz']");
         // локатор кнопки "Выбрать"
@@ -25,13 +23,14 @@ namespace CianPageTest
             driver = webDriver;
         }
 
-        public void ClickOneElementOfList(string nameList)
+        public void ClickOneElementOfList(string nameList, By locatorLocation)
         {
             var any = driver.FindElements(_allCityButton).FirstOrDefault(x => x.Text == nameList);
             any.Click();
             var choose = driver.FindElement(_chooseButton);
             choose.Click();
             Thread.Sleep(400);
+            WaitElementTextToBePresent(driver.FindElement(locatorLocation), NameList.ByNizhnyNovgorod);
         }
     }
 }
