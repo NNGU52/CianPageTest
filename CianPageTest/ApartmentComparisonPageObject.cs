@@ -47,6 +47,7 @@ namespace CianPageTest
             // добавлена к сравнению 1 квартира
             var oneApartment = driver.FindElement(_oneApartmentForm);
             builder.MoveToElement(oneApartment).Perform();
+            WaitElementToBeClickable(_addOneApatmentButton);
             var addApartmentOneApatment = driver.FindElement(_addOneApatmentButton);
             addApartmentOneApatment.Click();
 
@@ -71,6 +72,18 @@ namespace CianPageTest
             catch (WebDriverTimeoutException ex)
             {
                 throw new NotFoundException($"Not found: {locator}", ex);
+            }
+        }
+
+        public void WaitElementToBeClickable(By locator)
+        {
+            try
+            {
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                throw new NotFoundException($"Unable to click: {locator}", ex);
             }
         }
 

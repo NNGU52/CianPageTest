@@ -11,10 +11,9 @@ using OpenQA.Selenium.Interactions;
 namespace CianPageTest
 {
     [TestFixture]
-
     public class Tests : BaseClass
     {
-        [Test]
+        [TestCase]
         public void Test1()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -26,7 +25,7 @@ namespace CianPageTest
             Assert.AreEqual(NameList.ByNizhnyNovgorod, driver.FindElement(mainMenu._locationButton).Text, "Location is wrong");
         }
 
-        [Test]
+        [TestCase]
         public void Test2()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -38,7 +37,7 @@ namespace CianPageTest
             Assert.IsTrue(expectedSortDate.SequenceEqual(actualSortDate), "The sort date is wrong");
         }
 
-        [Test]
+        [TestCase]
         public void Test3()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -52,7 +51,7 @@ namespace CianPageTest
             pageScore.ThankYou();
         }
 
-        [Test]
+        [TestCase]
         public void Test4()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -66,7 +65,7 @@ namespace CianPageTest
             Assert.AreEqual(peakPage._checkResultInterestRate, driver.FindElement(peakPage._interestRateInput).GetAttribute("value"), "Error");
         }
 
-        [Test]
+        [TestCase]
         public void Test5()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -78,7 +77,7 @@ namespace CianPageTest
             Assert.AreEqual(apartmentComparison._numberApartmentExpected, apartmentComparison._numberApartmentActual, "Added incorrectly");
         }
 
-        [Test]
+        [TestCase]
         public void Test6()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -86,7 +85,7 @@ namespace CianPageTest
             Assert.IsFalse(mainMenu.ClickElementAsseptCookies(), "Element exists");
         }
 
-        [Test]
+        [TestCase]
         public void Test7()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -94,7 +93,7 @@ namespace CianPageTest
             Assert.That(mainMenu.AllTheTopTabs(), Has.Member("Аренда"));
         }
 
-        [Test]
+        [TestCase]
         public void Test8()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -105,7 +104,7 @@ namespace CianPageTest
             Assert.AreEqual(cianDreamTeam.expectedUrl, cianDreamTeam.currentUrl, "Incorrect Url");
         }
 
-        [Test]
+        [TestCase]
         public void Test9()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -120,7 +119,7 @@ namespace CianPageTest
             Assert.AreEqual(saveToFavorites._removeToFavorites, driver.FindElement(saveToFavorites._removeToFavoritesTest).Text, "Not removed");
         }
 
-        [Test]
+        [TestCase]
         public void Test10()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);

@@ -34,12 +34,26 @@ namespace CianPageTest
             builder.MoveToElement(oneApartment).Perform();
             var addFavorites = driver.FindElement(_addOneApartmentInFavorites);
             addFavorites.Click();
+            WaitElement(_saveToFavoritesText);
         }
 
         public void RemoveFromFavorites()
         {
             var addFavorites = driver.FindElement(_addOneApartmentInFavorites);
             addFavorites.Click();
+            WaitElement(_removeToFavoritesTest);
+        }
+
+        public void WaitElement(By locator)
+        {
+            try
+            {
+                new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                throw new NotFoundException($"Not found: {locator}", ex);
+            }
         }
     }
 }

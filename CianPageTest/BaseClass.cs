@@ -38,10 +38,10 @@ namespace CianPageTest
             driver.Manage().Cookies.DeleteAllCookies();
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         protected void DoAfterEach()
         {
-           //driver.Quit();
+           driver.Quit();
         }
     }
 }
